@@ -56,6 +56,7 @@ impl Colour {
             .expect("Device not found");
         i2c.smbus_write_byte(REG_ENABLE | COMMAND_BIT, REG_ENABLE_AEN | REG_ENABLE_PON)
             .expect("Failed to write to enable register");
+        info!("[rasp_driver_collection/Colour::new()]: SUCCESSFULLY INITIATED SENSOR");
         Colour {
             i2c,
             clear: 0,
@@ -82,6 +83,8 @@ impl Colour {
             .expect("Failed to read BDATAL register");
         let blue_high = self.i2c.smbus_read_byte(COMMAND_BIT | BDATAH)
             .expect("Failed to read BDATAH register");
+
+        info!("[rasp_driver_collection/Colour::update()]: SUCCESSFULLY READ COLOUR REGISTERS!");
 
         self.clear = clear_low;
         self.red = red_low;
