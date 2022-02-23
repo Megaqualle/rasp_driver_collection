@@ -54,6 +54,25 @@ impl Mpu6050 {
 
     }
 
+    pub fn get_x_rot(&self) -> u8 {
+        return self.x_rot;
+    }
+    pub fn get_y_rot(&self) -> u8 {
+        return self.y_rot;
+    }
+    pub fn get_z_rot(&self) -> u8 {
+        return self.z_rot;
+    }
+    pub fn get_x_mov(&self) -> u8 {
+        return self.x_mov;
+    }
+    pub fn get_y_mov(&self) -> u8 {
+        return self.y_mov;
+    }
+    pub fn get_z_mov(&self) -> u8 {
+        return self.z_mov;
+    }
+
     fn set_rotation(&mut self) {
        self.x_rot = self.i2c.smbus_read_byte(ACCEL_X_REGISTER)
            .expect("Failed to read the ACCEL_XOUT register");
