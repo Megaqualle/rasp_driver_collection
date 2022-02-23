@@ -50,41 +50,38 @@ impl Motors {
         }
     }
 
-    pub fn set_speed(&mut self, mut speed: f64) {
-        /*if speed <= 0.0 || speed >= 1.0 {
-            if speed >= 1.0 {
-                speed = 1.0;
-            }
-            else {
-                speed = 0.0;
-            }
-        }*/
+    pub fn set_speed(&mut self, speed: f64) {
         let speed = crate::adjust_pwm_value(speed);
         self.pwm.set_duty_cycle(speed).unwrap();
         self.spd = speed;
     }
 
-    pub fn set_direction(&mut self, dir: Direction, motor: Motor) {
+    pub fn set_direction(&mut self, dir: Direction, motor: Motor) { 
+        info!("[rasp_driver_collection/Motors::set_direction]: SETTING DIRECTION!");
         if motor == Motor::Motor1 {
             match dir {
                 Direction::Forwards => {
                     self.in1.set_high();
                     self.in2.set_low();
                     self.dir1 = Direction::Forwards;
+                    info!("[rasp_driver_collection/Motors::set_direction]: MOTOR 1 SET TO FORWARDS!");
                     },
                 Direction::Backwards => {
                     self.in1.set_low();
                     self.in2.set_high();
                     self.dir1 = Direction::Backwards;
+                    info!("[rasp_driver_collection/Motors::set_direction]: MOTOR 1 SET TO BACKWARDS!");
                     },
                 Direction::Halt => {
                     self.in1.set_high();
                     self.in2.set_high();
                     self.dir1 = Direction::Halt;
+                    info!("[rasp_driver_collection/Motors::set_direction]: MOTOR 1 SET TO HALT!");
                     },
             }
         }
         else if motor == Motor::Motor2 {
+            info!("[rasp_driver_collection/Motors::");
             match dir {
                 Direction::Forwards => {
                     self.in3.set_high();
