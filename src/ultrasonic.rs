@@ -40,14 +40,18 @@ impl Ultrasonic {
         while self.echo_pin.is_low() {
             start_time = start.elapsed().as_nanos();
         }
-        while self.echo_pin.is_high() {
+        while self.echo_pin.is_high() /*|| end_time - start_time > 20000000*/{
             end_time = end.elapsed().as_nanos();
         }
 
         let time = end_time - start_time;
 
-        let distance = time * (34300 * 1000000000) / 2;
+        let distance = time as f64 /1000.0 * (34300.0 / 1000000.0) / 2.0;
         self.distance = distance as f64;
         self.distance
+    }
+
+    pub fn distance(&self) -> f64 {
+        return self.distance;
     }
 }
