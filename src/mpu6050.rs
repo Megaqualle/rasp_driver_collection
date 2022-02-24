@@ -78,8 +78,8 @@ impl Mpu6050 {
            .expect("Failed to read the ACCEL_XOUT register");
        self.y_rot = self.i2c.smbus_read_byte(ACCEL_Y_REGISTER)
            .expect("Failed to read the ACCEL_YOUT register");
-       self.z_rot = self.i2c.smbus_read_byte(ACCEL_Z_REGISTER)
-           .expect("Failed to read the ACCEL_ZOUT register");
+       //self.z_rot = self.i2c.smbus_read_byte(ACCEL_Z_REGISTER)
+       //    .expect("Failed to read the ACCEL_ZOUT register");
     }
 
     fn set_position(&mut self) {
